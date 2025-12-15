@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router';
 
-import MainLayout from './layouts/MainLayout.jsx';
-import { About, Contact, Destinations, Home, NotFound, SingleDestination } from './pages';
+import MainLayout from './layouts/MainLayout.js';
+import { About, Contact, Destinations, Home, NotFound, SingleDestination } from './pages/index.ts';
 
 const App = () => {
   return (

@@ -3,8 +3,12 @@ import { Link } from 'react-router';
 
 import { useBooking } from '../../contexts/BookingContext';
 import { useTheme } from '../../contexts/ThemeContextProvider';
+import type { Destination } from '../../types';
 
-const DestinationCard = ({ title, image, text, slug }) => {
+// # Component Props Typing
+// * We reuse the 'Destination' type but exclude 'id' since it's not used in props here.
+// * This ensures we pass the correct data structure to the component.
+const DestinationCard = ({ title, image, description, slug }: Omit<Destination, 'id'>) => {
   // const theme = useContext(ThemeContext);
   const { theme } = useTheme();
 
@@ -29,7 +33,7 @@ const DestinationCard = ({ title, image, text, slug }) => {
         <Link to={`/destinations/${slug}`}>
           <h2 className='card-title hover:text-primary text-lg font-semibold'>{title}</h2>
         </Link>
-        <p>{text}</p>
+        <p>{description}</p>
         <div className='card-actions justify-end'>
           <button
             type='button'

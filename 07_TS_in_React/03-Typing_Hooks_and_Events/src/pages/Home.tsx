@@ -1,13 +1,20 @@
 import { useNavigate, useOutletContext } from 'react-router';
 
 import { DestinationCard } from '../components';
+import type { Destination } from '../types';
 
 const Home = () => {
-  const destinations = useOutletContext();
+  // # Context Consumption (Outlet)
+  // * 'useOutletContext' is generic. We specify it returns an array of 'Destination' objects.
+  // * This allows us to map over 'destinations' with full type safety.
+  const destinations = useOutletContext<Destination[]>();
 
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  // # Event Handler Typing
+  // * Explicitly type the event object to access properties like 'preventDefault' safely.
+  // * 'HTMLFormElement' specifies the element that triggered the event.
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate('/destinations');
   };
@@ -62,13 +69,7 @@ const Home = () => {
         <h2 className='text-secondary text-center text-3xl font-bold'>Popular Destinations</h2>
         <div className='grid gap-6 md:grid-cols-3'>
           {destinations?.slice(0, 3).map((destination) => (
-            <DestinationCard
-              key={destination.slug}
-              title={destination.title}
-              image={destination.image}
-              description={destination.description}
-              slug={destination.slug}
-            />
+            <DestinationCard key={destination.slug} {...destination} />
           ))}
         </div>
       </section>

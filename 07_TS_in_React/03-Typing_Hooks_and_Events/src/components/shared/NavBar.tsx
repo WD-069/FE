@@ -1,7 +1,8 @@
+import { useRef } from 'react';
 import { NavLink } from 'react-router';
 
 import { useBooking } from '../../contexts/BookingContext';
-import { useTheme } from '../../contexts/ThemeContextProvider';
+import { type UseableThemes, useTheme } from '../../contexts/ThemeContextProvider';
 
 const NavBar = () => {
   const { theme, changeTheme } = useTheme();
@@ -9,8 +10,19 @@ const NavBar = () => {
     bookingState: { premium },
   } = useBooking();
 
+  // # Ref Typing
+  // * 'useRef' needs the type of the DOM element it will attach to (HTMLDialogElement).
+  // * Initializing with 'null' is common for DOM refs.
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
   return (
     <div className='navbar bg-base-100 shadow-sm'>
+      {/* Optional Chaining (?.) safeguards against null if ref isn't attached yet */}
+      <button onClick={() => dialogRef.current?.showModal()}>Modal</button>
+      <dialog ref={dialogRef} className='inset-1/2 border-cyan-500 bg-indigo-700 p-3'>
+        Hello from Dialog
+      </dialog>
+
       <div className='flex-1'>
         <a className='btn btn-ghost text-xl' href='/'>
           Travel Agency
@@ -18,7 +30,10 @@ const NavBar = () => {
         <select
           defaultValue={theme}
           className='select'
-          onChange={(e) => changeTheme(e.target.value)}
+          // # Type Assertion (Casting)
+          // * We tell TS to treat 'e.target.value' as 'UseableThemes'.
+          // ! Be careful with assertions; only use them when you are sure the value matches the type.
+          onChange={(e) => changeTheme(e.target.value as UseableThemes)}
         >
           <option value='halloween'>Halloween</option>
           <option value='cyberpunk'>Cyberpunk</option>
