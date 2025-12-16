@@ -1,0 +1,10 @@
+onlyBuiltDependencies:
+  - '@scarf/scarf'
+  - '@tailwindcss/oxide'
+  - bcrypt
+  - esbuild
+  - node-pty
+  - protobufjs
+  - sharp
+  - sqlite3
+  - tree-sitter-bash
