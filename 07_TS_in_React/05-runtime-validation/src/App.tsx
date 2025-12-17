@@ -37,7 +37,7 @@ async function iceCreamAction(_prev: IceCreamState, formData: FormData) {
   // ! Now we validate the order with the Zod schema.
   // ? safeParse returns an object with success, data, and error.
   const { data, error, success } = IceCreamOrderSchema.safeParse(orderToSend);
-  // console.log('DATA', data);
+  console.log("DATA", data);
 
   // * If validation was successful...
   if (success) {
