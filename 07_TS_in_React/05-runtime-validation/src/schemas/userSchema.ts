@@ -31,10 +31,6 @@ const UserSchema = z.object({
   }),
 });
 
-// ! The Zod schema can serve directly as a basis for our TypeScript type.
-// z.infer<> extracts the type from the schema.
-export type User = z.infer<typeof UserSchema>;
-
 // * z.array() validates that it is an array AND that every element matches the schema.
 const UserResponseSchema = z.array(UserSchema);
 
