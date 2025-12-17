@@ -23,6 +23,11 @@ const IceCreamOrderSchema = z.object({
     .number()
     .positive({ error: "Too little cream" })
     .max(5, { error: "Too much cream" }),
+  // * ALTERNATIVE with an allowed minimum value of 0, instead of a positive one:
+  //  cream: z
+  // .number()
+  // .min(0, { error: "Too little cream" })
+  // .max(5, { error: "Too much cream" }),
 });
 
 export { IceCreamOrderSchema };
