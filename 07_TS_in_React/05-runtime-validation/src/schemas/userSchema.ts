@@ -10,6 +10,8 @@ const AddressSchema = z.object({
     // ! z.coerce.number() is super: It automatically converts strings to numbers BEFORE validation.
     lat: z.coerce.number({ error: "This should be a number!" }),
     lng: z.coerce.number(),
+    // ! A Union is alos possible:
+    // lng: z.union([z.number(), z.string()]),
   }),
 });
 
